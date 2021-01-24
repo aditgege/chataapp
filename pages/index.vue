@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="container flex flex-col h-screen justfy-center bg-green-400">
+    <div class="flex flex-col h-screen justfy-center bg-green-400">
       <Alert :show="alert" :message="message" class="mt-auto" />
       <div
         class="flex flex-col mb-auto mt-10 max-w-4xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden md:flex-row md:h-56"

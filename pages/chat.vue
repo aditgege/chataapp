@@ -20,7 +20,7 @@
        :name="message.name"
        :text="message.text"
        :time="message.time"
-       :status="getStatus(message.text)"
+       :status="getStatus(message)"
        :owner="message.id === user.id"
        :message="message"
      />
@@ -71,8 +71,8 @@ export default {
   },
   methods: {
     ...mapActions(["leftRoom", "setMessageSeen"]),
-    getStatus(messagetext) {
-      let res = this.seen.find(e => e.text == messagetext)
+    getStatus(message) {
+      let res = this.seen.find(e => e.text == message.text && e.time == message.time)
       console.log("ada" + messagetext +": " + res)
       if(res !== undefined) {
         return 'Dibaca'

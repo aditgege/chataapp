@@ -1,3 +1,6 @@
+// berisi event yang akan dijalankan
+// Aditia dwi pratomo
+
 const app = require("express")();
 const server = require("http").createServer(app);
 const io = require("socket.io")(server);
@@ -61,13 +64,6 @@ io.on("connection", (socket) => {
     return data
   });
 
-  socket.on("setSeenStatus", ({ room, seenStatus, id }) => {
-
-
-    // usersDB.setSeen(id, seenStatus);
-    // io.to(room).emit("updateUsers", usersDB.getUsersByRoom(room));
-  });
-
 
   const exitEvents = ["leftChat", "disconnect"];
 
@@ -75,10 +71,14 @@ io.on("connection", (socket) => {
     socket.on(event, () => {
       const id = socket.id;
       const user = usersDB.getUser(id);
-      if (!user) return;
+      if (!user) {
+        seenDB.removeAll()
+        return
+      };
       const { room, name } = user;
       usersDB.removeUser(id);
       socket.leave(room);
+      io.to(user.room).emit("updateSeen", seenDB.getAllSeen());
       io.to(room).emit("updateUsers", usersDB.getUsersByRoom(room));
       // io.to(room).emit("updateSeen", usersDB.getSeen(room));
       io.to(room).emit(

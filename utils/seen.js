@@ -18,6 +18,10 @@ class SeenDB {
     getSeenByRoom(room) {
       return this.seen.filter((seen) => seen.room === room);
     }
+
+    removeAll() {
+      this.seen = []
+    }
   
     removeSeen(id) {
       this.seen = this.seen.filter((seen) => seen.id !== id);

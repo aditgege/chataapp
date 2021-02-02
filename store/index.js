@@ -1,3 +1,5 @@
+import seen from "../utils/seen";
+
 export const state = () => ({
   user: {},
   messages: [],
@@ -15,17 +17,14 @@ export const mutations = {
   setUser(state, user) {
     state.user = user;
   },
-
-  setSeen(state, seen) {
-    debugger
-    state.seen = seen
-  },
-
   SOCKET_newMessage(state, msg) {
     state.messages = [...state.messages, msg];
   },
   SOCKET_updateUsers(state, users) {
     state.users = users;
+  },
+  SOCKET_updateSeen(state, messages) {
+    state.seen = messages
   },
   
   clearData(state) {
@@ -81,10 +80,15 @@ export const actions = {
     });
   },
 
-  async addSeen({ dispatch }, message) {
+  async addSeen({ dispatch, state }, msg) {
+    const { user } = state;
+    const payload = {
+      msg,
+      id: user.id,
+    };
     dispatch("socketEmit", {
       action: "addSeen",
-      payload: message,
+      payload,
     });
   },
 

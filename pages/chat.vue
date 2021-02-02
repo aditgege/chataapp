@@ -20,10 +20,11 @@
        :name="message.name"
        :text="message.text"
        :time="message.time"
-       :status="user.seen == true && message.id === user.id ? 'dibaca': 'terkirim'"
+       :status="getStatus(message.text)"
        :owner="message.id === user.id"
        :message="message"
      />
+       <!-- :status="user.seen == true && message.id === user.id ? 'dibaca': 'terkirim'" -->
 
      {{ user.seen }}
      <p
@@ -35,6 +36,7 @@
       </p>
    </div>
    <input-messages />
+
 </div>
 </template>
 <script>
@@ -51,7 +53,7 @@ export default {
     },
     computed: {
     ...mapState(["user", "messages", "users", "seen"]),
-    ...mapGetters(["typingUsers"]),
+    ...mapGetters(["typingUsers", "messageSeen"]),
   },
   watch: {
     messages(newVal, oldVal) {
@@ -69,6 +71,15 @@ export default {
   },
   methods: {
     ...mapActions(["leftRoom", "setMessageSeen"]),
+    getStatus(messagetext) {
+      let res = this.seen.find(e => e.text == messagetext)
+      console.log("ada" + messagetext +": " + res)
+      if(res !== undefined) {
+        return 'Dibaca'
+      }else{
+        return 'Terkirim'
+      }
+    },
     exit() {
       this.leftRoom();
       this.$router.push("/?message=leftChat");

@@ -46,7 +46,7 @@ export default {
         this.createMessage(this.text);
         this.text = "";
         this.setTypingStatus(false);
-        this.setMessageSeen(true)
+        // this.setMessageSeen(true)
     },
     resetValidation() {
       this.$refs.form.resetValidation();
@@ -60,7 +60,7 @@ export default {
     stopTyping() {
       if (this.typingStatus) {
         this.setTypingStatus(false);
-        this.setMessageSeen(true)
+        // this.setMessageSeen(true)
       }
     }
   },

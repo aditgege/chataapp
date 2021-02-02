@@ -41,19 +41,24 @@ io.on("connection", (socket) => {
     io.to(room).emit("updateUsers", usersDB.getUsersByRoom(room));
   });
 
-  socket.on("addSeen", (message) => {
-    seenDB.addSeen({
-      ...message,
-      id: socket.id,
-    });
+  socket.on("addSeen", ({ id, msg }) => {
+    const user = usersDB.getUser(id);
+    if (msg.name !== 'admin') {
+      seenDB.addSeen({
+        ...msg,
+        id: socket.id,
+        user
+      });
+      io.to(user.room).emit("updateSeen", seenDB.getAllSeen());
+    }
     // console.log(seenDB)
     // return seenDB.get()
   });
 
   socket.on("messageSeen", (id) => {
-     let seen = seenDB.getSeen(id);
-
-     return seen
+    let seen = seenDB.getSeen(id);
+    const { data } = seen
+    return data
   });
 
   socket.on("setSeenStatus", ({ room, seenStatus, id }) => {
@@ -75,6 +80,7 @@ io.on("connection", (socket) => {
       usersDB.removeUser(id);
       socket.leave(room);
       io.to(room).emit("updateUsers", usersDB.getUsersByRoom(room));
+      // io.to(room).emit("updateSeen", usersDB.getSeen(room));
       io.to(room).emit(
         "newMessage",
         new Message("admin", `${name} keluar dari obrolan`),

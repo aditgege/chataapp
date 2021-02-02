@@ -6,6 +6,10 @@ class SeenDB {
     addSeen(seen) {
       this.seen = [...this.seen, seen];
     }
+
+    getAllSeen() {
+      return this.seen
+    }
   
     getSeen(id) {
       return this.seen.find((seen) => seen.id === id);

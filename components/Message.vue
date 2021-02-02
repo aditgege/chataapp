@@ -9,13 +9,23 @@
 </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 export default {
     props: ['name', 'text', 'time', 'owner', 'status','message'],
+    computed: {
+        ...mapState(["seen"]),
+        statusSeen() {
+            let res = this.seen.find(e => console.log(e.text))
+            // console.log(res)
+            return  res
+        }
+    },
     methods: {
         ...mapActions(["addSeen"]),
         visibilityChanged() {
-            this.addSeen(this.message)
+            if(!this.owner) {
+                this.addSeen(this.message)
+            }
         }
     }
 }

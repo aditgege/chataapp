@@ -73,7 +73,6 @@ export default {
     ...mapActions(["leftRoom", "setMessageSeen"]),
     getStatus(message) {
       let res = this.seen.find(e => e.text == message.text && e.time == message.time)
-      console.log("ada" + messagetext +": " + res)
       if(res !== undefined) {
         return 'Dibaca'
       }else{

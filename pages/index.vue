@@ -71,7 +71,7 @@ export default {
     return {
       user: {
         name: "",
-        room: "",
+        room: "roomdev",
         typingStatus: false,
       },
       valid: true,

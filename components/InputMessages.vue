@@ -41,11 +41,12 @@ export default {
     ...mapGetters(["typingStatus"]),
   },
   methods: {
-    ...mapActions(["createMessage", "setTypingStatus"]),
+    ...mapActions(["createMessage", "setTypingStatus", "setMessageSeen"]),
     send() {
         this.createMessage(this.text);
         this.text = "";
         this.setTypingStatus(false);
+        this.setMessageSeen(true)
     },
     resetValidation() {
       this.$refs.form.resetValidation();
@@ -53,8 +54,15 @@ export default {
     typing() {
       if (!this.typingStatus) {
         this.setTypingStatus(true);
+        // this.setMessageSeen(true)
       }
     },
+    stopTyping() {
+      if (this.typingStatus) {
+        this.setTypingStatus(false);
+        this.setMessageSeen(true)
+      }
+    }
   },
 };
 </script>

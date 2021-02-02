@@ -3,6 +3,8 @@ const server = require("http").createServer(app);
 const io = require("socket.io")(server);
 
 const usersDB = require("../utils/users")();
+const seenDB = require("../utils/seen")();
+
 const Message = require("../models/Message")();
 
 io.on("connection", (socket) => {
@@ -38,6 +40,29 @@ io.on("connection", (socket) => {
     usersDB.setTypingStatus(id, typingStatus);
     io.to(room).emit("updateUsers", usersDB.getUsersByRoom(room));
   });
+
+  socket.on("addSeen", (message) => {
+    seenDB.addSeen({
+      ...message,
+      id: socket.id,
+    });
+    // console.log(seenDB)
+    // return seenDB.get()
+  });
+
+  socket.on("messageSeen", (id) => {
+     let seen = seenDB.getSeen(id);
+
+     return seen
+  });
+
+  socket.on("setSeenStatus", ({ room, seenStatus, id }) => {
+
+
+    // usersDB.setSeen(id, seenStatus);
+    // io.to(room).emit("updateUsers", usersDB.getUsersByRoom(room));
+  });
+
 
   const exitEvents = ["leftChat", "disconnect"];
 

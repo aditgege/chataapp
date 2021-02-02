@@ -1,5 +1,5 @@
 <template>
-<div class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
+<div  ref="chat" class="flex-1 p:2 sm:p-6 justify-between flex flex-col h-screen">
    <div class="flex sm:items-center justify-between py-3 border-b-2 border-gray-200 ">
       <div class="flex items-center space-x-4">
          <div class="flex flex-col leading-tight">
@@ -20,8 +20,12 @@
        :name="message.name"
        :text="message.text"
        :time="message.time"
+       :status="user.seen == true && message.id === user.id ? 'dibaca': 'terkirim'"
        :owner="message.id === user.id"
+       :message="message"
      />
+
+     {{ user.seen }}
      <p
         v-for="(typingUser, index) in typingUsers"
         :key="`typingUser-${index}`"
@@ -46,13 +50,13 @@ export default {
         InputMessages
     },
     computed: {
-    ...mapState(["user", "messages", "users"]),
+    ...mapState(["user", "messages", "users", "seen"]),
     ...mapGetters(["typingUsers"]),
   },
   watch: {
-    messages() {
+    messages(newVal, oldVal) {
       setTimeout(() => {
-        if (this.$refs.chat) {
+        if (newVal !== oldVal) {
           this.$refs.chat.scrollTop = this.$refs.chat.scrollHeight;
         }
       }, 0);
@@ -64,11 +68,14 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["leftRoom"]),
+    ...mapActions(["leftRoom", "setMessageSeen"]),
     exit() {
       this.leftRoom();
       this.$router.push("/?message=leftChat");
     },
+    visibilityChanged() {
+      // this.setMessageSeen(true)
+    }
   }
 }
 </script>

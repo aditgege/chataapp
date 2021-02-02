@@ -23,6 +23,11 @@ class UsersDB {
       const index = this.users.findIndex((user) => user.id === id);
       this.users[index].typingStatus = typingStatus;
     }
+
+    setSeen(id , seen) {
+      const index = this.users.findIndex((user) => user.id === id);
+      this.users[index].seen = seen;
+    }
   }
   
   module.exports = () => {

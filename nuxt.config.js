@@ -1,6 +1,7 @@
 module.exports = {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
+  telemetry: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'chatapp',
@@ -23,7 +24,9 @@ module.exports = {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/socket-client.js', mode: 'client' }
+    { src: '~/plugins/socket-client.js', mode: 'client' },
+    { src: '~/plugins/observer.js' }
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

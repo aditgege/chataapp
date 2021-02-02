@@ -2,6 +2,8 @@ export const state = () => ({
   user: {},
   messages: [],
   users: [],
+  seen: [],
+  last_user_message: null
 });
 
 export const getters = {
@@ -13,12 +15,19 @@ export const mutations = {
   setUser(state, user) {
     state.user = user;
   },
+
+  setSeen(state, seen) {
+    debugger
+    state.seen = seen
+  },
+
   SOCKET_newMessage(state, msg) {
     state.messages = [...state.messages, msg];
   },
   SOCKET_updateUsers(state, users) {
     state.users = users;
   },
+  
   clearData(state) {
     state.user = {};
     state.messages = [];
@@ -27,6 +36,9 @@ export const mutations = {
   setTypingStatus(state, status) {
     state.user.typingStatus = status;
   },
+  setMessageSeen(state, value) {
+    state.user.seen = value
+  }
 };
 
 export const actions = {
@@ -39,7 +51,6 @@ export const actions = {
       msg,
       id: user.id,
     };
-
     dispatch("socketEmit", {
       action: "createMessage",
       payload,
@@ -69,15 +80,20 @@ export const actions = {
       payload: user,
     });
   },
+
+  async addSeen({ dispatch }, message) {
+    dispatch("socketEmit", {
+      action: "addSeen",
+      payload: message,
+    });
+  },
+
   async createUser({ commit, dispatch }, user) {
     const { id } = await dispatch("socketEmit", {
       action: "createUser",
       payload: user,
     });
     
-    debugger
-    console.log(id)
-
     commit("setUser", { id, ...user });
   },
   SOCKET_reconnect({ state, dispatch }) {

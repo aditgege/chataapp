@@ -4,7 +4,9 @@ class Message {
       this.text = text;
       this.id = id;
       this.time = new Date().toString().slice(15, 24);
+      // this.seen = false
     }
+
    }
     
    module.exports = () => {

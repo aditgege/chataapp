@@ -1,3 +1,11 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
+
 <template>
     <div class="flex max-w-sm w-full mx-auto bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
         <div class="flex justify-center items-center w-12 bg-blue-500">

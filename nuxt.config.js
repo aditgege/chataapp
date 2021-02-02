@@ -1,3 +1,10 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 module.exports = {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',

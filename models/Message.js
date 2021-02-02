@@ -1,3 +1,10 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 class Message {
     constructor(name, text, id) {
       this.name = name;

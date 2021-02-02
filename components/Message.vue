@@ -1,3 +1,10 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 <template>
 <div class="chat-message" v-observe-visibility="visibilityChanged">
     <div class="flex items-end" :class="owner ? 'justify-end': ''">

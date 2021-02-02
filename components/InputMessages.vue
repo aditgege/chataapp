@@ -1,3 +1,10 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 <template>
   <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
     <form  class="relative flex" @submit.prevent="send">

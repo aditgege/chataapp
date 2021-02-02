@@ -1,3 +1,10 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 import Vue from 'vue';
 import VueSocketIO from 'vue-socket.io';
 import store from '../store';

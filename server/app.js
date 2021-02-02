@@ -1,5 +1,12 @@
 // berisi event yang akan dijalankan
 // Aditia dwi pratomo
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 
 const app = require("express")();
 const server = require("http").createServer(app);

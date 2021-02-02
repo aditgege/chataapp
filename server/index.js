@@ -1,3 +1,10 @@
+/*
+*
+*Aditia Dwi Pratomo 1942806
+*Erio Hermawan 1942808
+*
+*
+*/
 const consola = require('consola');
 const { Nuxt, Builder } = require('nuxt');
 const { app, server } = require('./app');
